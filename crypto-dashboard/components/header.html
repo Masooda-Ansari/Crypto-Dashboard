@@ -1,0 +1,31 @@
+<!-- components/header.html -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">CD</div>
+      <span class="logo-text">Crypto<span>Dash</span></span>
+    </a>
+
+    <nav class="header-nav" id="mainNav">
+      <a href="index.html" class="nav-link" data-page="index">Dashboard</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        LIVE
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+        🌙
+      </button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobileMenu" style="display:none; background:var(--bg-secondary); border-bottom:1px solid var(--border-subtle); padding:0.75rem 1.5rem;">
+  <a href="index.html" class="nav-link" style="display:block; padding:0.6rem 0;">Dashboard</a>
+  <a href="about.html" class="nav-link" style="display:block; padding:0.6rem 0;">About</a>
+</div>

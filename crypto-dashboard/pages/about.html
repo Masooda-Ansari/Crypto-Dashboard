@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – CryptoDash</title>
+  <meta name="description" content="About CryptoDash — a free real-time crypto dashboard powered by CoinGecko API.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='50%25' y='62%25' text-anchor='middle' font-size='18' font-family='monospace' font-weight='bold' fill='%230a0e1a'>₿</text></svg>">
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="page-wrapper">
+
+  <div id="header"></div>
+
+  <main>
+    <!-- Hero -->
+    <div class="about-hero">
+      <h1>CryptoDash</h1>
+      <p>
+        A free, real-time cryptocurrency tracking dashboard built as a demonstration
+        of live API integration, responsive design, and modern vanilla JavaScript.
+      </p>
+      <a href="index.html" class="btn btn-primary" style="font-size:1rem;padding:0.75rem 2rem;">
+        → Open Dashboard
+      </a>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="section">
+      <div class="section-title">What's Inside</div>
+      <div class="about-features">
+
+        <div class="about-feature-card">
+          <div class="feature-icon">📡</div>
+          <div class="feature-title">Live Market Data</div>
+          <p class="feature-desc">
+            Real-time crypto prices, market cap, 24h volume, and dominance stats fetched
+            from the CoinGecko public API — no signup required.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">Interactive Charts</div>
+          <p class="feature-desc">
+            7-day, 30-day, and 90-day price history charts rendered with Chart.js.
+            Hover tooltips, gradient fills, and color-coded trends (green/red).
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">Smart Search</div>
+          <p class="feature-desc">
+            Search any of 10,000+ cryptocurrencies with live autocomplete suggestions,
+            ranking info, and instant detail loading.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">⭐</div>
+          <div class="feature-title">Favorites (LocalStorage)</div>
+          <p class="feature-desc">
+            Star any coin to save it to your personal watchlist. Favorites persist
+            across sessions using the browser's LocalStorage — no account needed.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">💱</div>
+          <div class="feature-title">Currency Converter</div>
+          <p class="feature-desc">
+            Convert between USD and INR using a live exchange rate fetched from the
+            CoinGecko simple price endpoint. Swap direction with one click.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">🏆</div>
+          <div class="feature-title">Top Gainers & Losers</div>
+          <p class="feature-desc">
+            See which coins are pumping or dumping in the last 24 hours — ranked by
+            percentage change from the top 20 coins by market cap.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">🌙</div>
+          <div class="feature-title">Dark / Light Mode</div>
+          <p class="feature-desc">
+            Toggle between a dark finance aesthetic and a clean light theme.
+            Your preference is saved to localStorage and persists across pages.
+          </p>
+        </div>
+
+        <div class="about-feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Fully Responsive</div>
+          <p class="feature-desc">
+            Mobile-first layout with adaptive grids, collapsible navigation,
+            and optimized typography for every screen size.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tech Stack
+    <div class="tech-stack section">
+      <div class="section-title">Tech Stack</div>
+      <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:0.5rem;">
+        100% vanilla — no frameworks, no bundlers, no npm. Just HTML, CSS, and ES modules.
+      </p>
+      <div class="tech-chips">
+        <span class="tech-chip">HTML5</span>
+        <span class="tech-chip">CSS3 (Custom Properties)</span>
+        <span class="tech-chip">JavaScript ES Modules</span>
+        <span class="tech-chip">Chart.js 4</span>
+        <span class="tech-chip">CoinGecko API v3</span>
+        <span class="tech-chip">LocalStorage</span>
+        <span class="tech-chip">Fetch API</span>
+        <span class="tech-chip">CSS Grid + Flexbox</span>
+        <span class="tech-chip">Responsive Design</span>
+        <span class="tech-chip">Google Fonts</span>
+      </div>
+    </div> -->
+
+    <!-- Architecture
+     <div class="card section">
+      <div class="section-title">Project Architecture</div>
+      <pre style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);line-height:2;overflow-x:auto;">
+crypto-dashboard/
+├── components/
+│   ├── header.html       ← Sticky nav, theme toggle, live badge
+│   └── footer.html       ← Links, disclaimer, toast container
+├── pages/
+│   ├── index.html        ← Dashboard (search, table, chart, sidebar)
+│   └── about.html        ← This page
+├── css/
+│   ├── base.css          ← CSS variables, reset, fonts
+│   ├── layout.css        ← Grid, flex helpers, breakpoints
+│   ├── components.css    ← Header, footer, cards, inputs, spinner
+│   └── dashboard.css     ← Ticker, table, chart, sidebar widgets
+└── js/
+    ├── loader.js         ← Injects header/footer, wires theme/nav
+    ├── api.js            ← CoinGecko fetch functions + cache
+    ├── utils.js          ← Formatters, LocalStorage, toast, sparklines
+    └── dashboard.js      ← Main app logic (ES module)
+      </pre>
+    </div> -->
+
+    <!-- Disclaimer -->
+    <div class="card section" style="background:rgba(255,77,77,0.05);border-color:rgba(255,77,77,0.15);"> -->
+      <div class="section-title" style="color:var(--accent-red);">Disclaimer</div>
+      <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;">
+        CryptoDash is for <strong>educational and demonstration purposes only</strong>.
+        Prices displayed may be delayed. This is not financial advice.
+        Cryptocurrency markets are highly volatile — never invest more than you can afford to lose.
+        All data is sourced from the <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a> public API.
+      </p>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/loader.js"></script>
+</body>
+</html>

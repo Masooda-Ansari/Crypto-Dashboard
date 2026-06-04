@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoDash – Real-Time Market Tracker</title>
+  <meta name="description" content="Track live cryptocurrency prices with real-time charts, favorites, and currency conversion.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='50%25' y='62%25' text-anchor='middle' font-size='18' font-family='monospace' font-weight='bold' fill='%230a0e1a'>₿</text></svg>">
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="page-wrapper">
+
+  <!-- Header (loaded by loader.js) -->
+  <div id="header"></div>
+
+  <!-- Ticker Tape -->
+  <div class="ticker-bar" id="tickerBar">
+    <div class="ticker-inner" id="tickerInner">
+      <div class="ticker-item" style="color:var(--text-muted);font-size:0.75rem;">Loading market data…</div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ── MARKET STATS BAR ── -->
+    <div class="stats-bar section">
+      <div class="stat-card">
+        <div class="stat-label">Total Market Cap</div>
+        <div class="stat-value" id="statMktCap">—</div>
+        <div class="stat-sub">Global crypto</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">BTC Dominance</div>
+        <div class="stat-value" id="statBtcDom">—</div>
+        <div class="stat-sub">Market share</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active Coins</div>
+        <div class="stat-value" id="statCoins">—</div>
+        <div class="stat-sub">Listed assets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">24h Volume</div>
+        <div class="stat-value" id="statVol">—</div>
+        <div class="stat-sub">Global trading</div>
+      </div>
+    </div>
+
+    <!-- ── SEARCH ── -->
+    <div class="search-section section">
+      <div class="search-wrapper">
+        <div class="input-wrapper" style="position:relative;">
+          <span class="input-icon">🔍</span>
+          <input
+            class="input"
+            type="text"
+            id="search"
+            placeholder="Search Bitcoin, Ethereum, Solana…"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <div class="search-suggestions" id="searchSuggestions" style="display:none;"></div>
+        </div>
+      </div>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">
+        Type a coin name or symbol, then press Enter or pick from suggestions
+      </p>
+    </div>
+
+    <!-- ── MAIN LAYOUT ── -->
+    <div class="dashboard-layout">
+
+      <!-- LEFT: Main Content -->
+      <div class="dashboard-main">
+
+        <!-- Coin Detail Result -->
+        <div id="results"></div>
+
+        <!-- Price Chart -->
+        <div class="chart-section" id="chartSection" style="display:none;">
+          <div class="chart-header">
+            <span class="chart-title" id="chartTitle">Price Chart</span>
+            <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);">Powered by CoinGecko</span>
+          </div>
+          <canvas id="priceChart" height="280"></canvas>
+        </div>
+
+        <!-- Top Coins Table -->
+        <div class="coins-table-section section">
+          <div class="table-header">
+            <span class="section-title" style="margin:0;">Top Cryptocurrencies</span>
+            <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);">by Market Cap</span>
+          </div>
+          <table class="coins-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th class="right">Price</th>
+                <th class="right">24h %</th>
+                <th class="right">Market Cap</th>
+                <th class="right">7D</th>
+              </tr>
+            </thead>
+            <tbody id="coinsTableBody">
+              <tr><td colspan="6" style="padding:2rem;text-align:center;color:var(--text-muted);">Loading coins…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /dashboard-main -->
+
+      <!-- RIGHT: Sidebar -->
+      <div class="dashboard-sidebar">
+
+        <!-- Favorites -->
+        <div class="favorites-section">
+          <div class="flex-between">
+            <span class="section-title" style="margin:0;">My Favorites</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">★ starred</span>
+          </div>
+          <ul class="fav-list" id="favList"></ul>
+        </div>
+
+        <!-- Top Gainers / Losers -->
+        <div class="movers-section">
+          <div class="movers-tabs">
+            <button class="mover-tab active gainers" data-type="gainers">▲ Gainers</button>
+            <button class="mover-tab losers" data-type="losers">▼ Losers</button>
+          </div>
+          <div class="mover-list" id="moversList">
+            <div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:0.85rem;">Loading…</div>
+          </div>
+        </div>
+
+        <!-- Currency Converter (USD ↔ INR) -->
+        <div class="converter-section">
+          <div class="flex-between" style="margin-bottom:0.25rem;">
+            <span class="section-title" style="margin:0;">Converter</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">USD ↔ INR</span>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-muted);">Live exchange rate</p>
+          <div class="converter-inputs">
+            <div class="converter-row">
+              <span class="converter-label">USD</span>
+              <input class="converter-input" type="number" id="converterUsd" placeholder="0.00" min="0">
+            </div>
+            <div class="converter-swap" id="converterSwap" title="Swap">⇅</div>
+            <div class="converter-row">
+              <span class="converter-label">INR</span>
+              <input class="converter-input" type="number" id="converterInr" placeholder="0.00" min="0">
+            </div>
+          </div>
+          <div class="converter-result" id="converterResult"></div>
+        </div>
+
+      </div><!-- /dashboard-sidebar -->
+    </div><!-- /dashboard-layout -->
+  </main>
+
+  <!-- Footer (loaded by loader.js) -->
+  <div id="footer"></div>
+
+  <!-- Loader first (sync header/footer), then module -->
+  <script src="../js/loader.js"></script>
+  <script type="module" src="../js/dashboard.js"></script>
+</body>
+</html>
